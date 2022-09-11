@@ -36,7 +36,9 @@ namespace OrderWatcherService
             {
                 foreach (string line in _lines)
                 {
-                    _orders.Add(BuildOrderFromString(line));
+                    var order = BuildOrderFromString(line);
+                    if (order != null)
+                        _orders.Add(order);
                 }
                 Console.WriteLine($"Processing of {_orderFileName} completed.");
             }
