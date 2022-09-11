@@ -29,14 +29,10 @@ namespace OrderWatcherService
         private void ProcessExistingFiles()
         {
             var orderfiles = Directory.GetFiles(_ordersPath, Constants.ORDERS_FILE_EXTENSION);
-            ParallelOptions parallelOptions = new();
-            parallelOptions.MaxDegreeOfParallelism = int.TryParse(ConfigurationManager.AppSettings["MaxDegreeOfParalellism"], out int maxDegree) ? maxDegree : Constants.MAX_DEGREE_OF_PARALLELISM;
-
             foreach (var orderFile in orderfiles)
             {
                 OrderManager.Instance.ProcessNewOrders(orderFile);
             }
-
         }
 
         private void CreateFileSystemWatcher()
